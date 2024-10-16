@@ -5,7 +5,7 @@ import './ShoppingCart.css';
 
 
 const ShoppingCart = () => {
-  const dispatch = userDispatch();
+  const dispatch = useDispatch();
   const  cartItems = useSelector(state => state.cart.cartItems);
   let totalAmount = cartItems.reduce((total,current) => total + current.price*current.quantity,0);
 
@@ -32,7 +32,13 @@ const ShoppingCart = () => {
       <ul className="cart-items">
        {cartItems.map( item =>(
         <li key={item.id} className='cart-item'>
-            
+            <span>{item.name} - ${item.price}</span>
+            <div className="quantity-controls">
+                <button className="quantity-control-btn"  onClick={() => handleDecreaseItemQuantity(item.id)}>-</button>
+                <span>{item.quantity}</span>
+                <button className="quantity-control-btn"  onClick={() => handleIncreaseItemQuantity(item.id)}>+</button>
+            </div>
+            <button className="remove-item-btn" onClick={() => handleRemoveItem(item.id)}>Remove</button>
         </li>
         ))}
       </ul>
