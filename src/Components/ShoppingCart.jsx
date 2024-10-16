@@ -6,8 +6,8 @@ import './ShoppingCart.css';
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
-  const  cartItems = useSelector(state => state.cart.cartItems);
-  let totalAmount = cartItems.reduce((total,current) => total + current.price*current.quantity,0);
+  const cartItems = useSelector(state => state.cart.cartItems);
+  const totalAmount = cartItems.reduce((total, current) => total + current.price * current.quantity, 0);
 
   const handleRemoveItem= itemId => {
     dispatch(removeItemFromCart(itemId));
@@ -42,7 +42,8 @@ const ShoppingCart = () => {
         </li>
         ))}
       </ul>
-      <button className="clear-cart-btn">Clear Cart</button>
+      <button className="clear-cart-btn" onClick={handleCleanCart}>Clear Cart</button>
+      <div>{totalAmount ? <div>The total amount is {totalAmount}</div> : ''}</div>
     </div>
   
     </>
